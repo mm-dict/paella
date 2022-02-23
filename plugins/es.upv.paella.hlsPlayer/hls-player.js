@@ -205,7 +205,7 @@
 
 								// Fixes hls.js problems when loading the initial quality level
 								this._hls.currentLevel = this._hls.levels.length>=initialQualityLevel ? initialQualityLevel : -1;
-								setTimeout(() => this._hls.currentLevel = -1, 1000);
+								//setTimeout(() => this._hls.currentLevel = -1, 1000);
 
 								// Fixes hls.js problems loading some live videos
 								if (isLiveStreaming) {
