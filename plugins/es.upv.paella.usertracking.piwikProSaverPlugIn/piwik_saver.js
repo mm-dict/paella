@@ -9,7 +9,7 @@ paella.addPlugin(function() {
 			if (this.config.tracker && this.config.siteId) {
 				_paq.push(['trackPageView']);
 				_paq.push(['enableLinkTracking']);
-				(function(window, document, dataLayerName, id) {
+				(function(window, document, dataLayerName, tracker, id) {
 					window[dataLayerName]=window[dataLayerName]||[],
 					window[dataLayerName].push(
 						{
@@ -37,12 +37,13 @@ paella.addPlugin(function() {
 					var qP=[];
 					dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");
 					var qPString=qP.length>0?("?"+qP.join("&")):"";
-					tags.async=!0,tags.src=this.config.tracker+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+					tags.async=!0,tags.src = tracker + id + ".js" + qPString,
+						scripts.parentNode.insertBefore(tags,scripts);
 					!function(a,n,i){
 						a[n]=a[n]||{};
 						for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
 					})
-				(window, document, 'dataLayer', this.config.siteId);			
+				(window, document, 'dataLayer', this.config.tracker, this.config.siteId);			
 			}
 			else {
 				onSuccess(false);
